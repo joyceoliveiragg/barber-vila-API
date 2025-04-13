@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: vilabarber-shop-api
+
+  datasource:
+    url: jdbc:postgresql://db:5432/vilabarber-shop-api
+    username: vilabarber-shop-api
+    password: vilabarber-shop-api
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true

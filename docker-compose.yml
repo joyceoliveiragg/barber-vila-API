@@ -1,0 +1,37 @@
+services:
+  app:
+    build:
+      context: .
+    command: bash start-dev.sh
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/vilabarber-shop-api
+      DB_USER: vilabarber-shop-api
+      DB_PASSWORD: vilabarber-shop-api
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    volumes:
+      - .:/vilabarber-shop-api:z
+    depends_on:
+      - db
+    networks:
+      - vilabarber-shop-net
+  db:
+    image: postgres:17.2
+    environment:
+      datasource:
+      POSTGRES_USER: vilabarber-shop-api
+      POSTGRES_PASSWORD: vilabarber-shop-api
+      POSTGRES_DB: vilabarber-shop-api
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "5432:5432"
+    networks:
+      - vilabarber-shop-net
+networks:
+  vilabarber-shop-net:
+    name: vilabarber-shop-net
+    external: true
+volumes:
+  db:
